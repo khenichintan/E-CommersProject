@@ -1,0 +1,84 @@
+<%- include('../header') %>
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Sub Category Tables</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active">Sub Category Tables</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+            <!-- /.container-fluid -->
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Sub Category Data View</h3>
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body">
+                                <table id="example1" class="table table-bordered table-striped" style="text-align: center;">
+                                    <thead>
+                                        <tr>
+                                            <th>Category</th>
+                                            <th>Sub Category Name</th>
+                                            <th>Operation</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% for(var sc of subdata) {%>
+                                            <tr>
+
+                                                <td>
+                                                    <%= sc.cat_id.category  %>
+                                                </td>
+                                                <td>
+                                                    <%= sc.SubcategoryName %>
+                                                </td>
+
+                                                <td><a href="/Admin/subcategory/delete/<%= sc.id %>"><i class="fa-solid fa-trash-arrow-up" style="font-size: 25px; padding-right: 20px;"></i></a>
+                                                    <a href="/Admin/subcategory/update/<%= sc.id %>"><i class="fa-regular fa-pen-to-square" style="font-size: 25px;"></i></a></td>
+
+                                                <td>
+                                                    <% if(sc.isActive) {%>
+                                                        <a href="/Admin/subcategory/deactive/<%= sc.id %>"><i class="fa-regular fa-eye" style="color: #389b31; font-size: 25px;"></i></a>
+                                                        <% } else { %>
+                                                            <a href="/Admin/subcategory/active/<%= sc.id %>"><i class="fa-solid fa-eye" style="color: #d71919; font-size: 25px;"></i></a>
+                                                            <% } %>
+                                                </td>
+
+                                            </tr>
+                                            <% } %>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Category</th>
+                                            <th>Sub Category Name</th>
+                                            <th>Operation</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <%- include('../footer') %>

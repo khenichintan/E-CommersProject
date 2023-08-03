@@ -1,0 +1,77 @@
+<%- include('../header') %>
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Extra Category Form</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active">Extra Category Add</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+            <!-- /.container-fluid -->
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card card-warning">
+                            <div class="card-header">
+                                <h3 class="card-title">Extra Category Form</h3>
+                            </div>
+                            <div class="card-body">
+                                <form action="/Admin/Extracat/Extracatrecord" method="post" class="form-horizontal">
+
+                                    <div class="row form-group">
+                                        <div class="col-sm-12">
+                                            <label for="select" class=" form-control-label">Select Category</label>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <select name="cat_id" class="form-control" onchange="getsubcategory()" id="cat_id">
+                                                <option>Select Category</option>
+                                                <% for(var sc of cetdata ) {%>
+                                                <option value="<%= sc.id %>"><%= sc.category %></option>
+                                                <% } %>
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-12 mt-3">
+                                            <div class="form-group">
+                                                <label>Select Subcategory</label>
+                                                <select name="subcat_id" class="form-control" id="subcat_id">
+                                                        <option>Select Subcategory</option>
+                                                    </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <!-- text input -->
+                                            <div class="form-group">
+                                                <label>Extra Category Name</label>
+                                                <input type="text" class="form-control" placeholder="Enter Extra Category" name="ExtracatName">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="card-footer">
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <%- include('../footer') %>

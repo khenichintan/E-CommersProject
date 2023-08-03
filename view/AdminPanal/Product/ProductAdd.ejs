@@ -1,0 +1,196 @@
+<%- include('../header') %>
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Type Form</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active">Type Add</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+            <!-- /.container-fluid -->
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card card-warning">
+                            <div class="card-header">
+                                <h3 class="card-title">Type Form</h3>
+                            </div>
+                            <div class="card-body">
+                                <form action="/Admin/Product/Productrecord" method="post" enctype="multipart/form-data" class="form-horizontal">
+
+                                    <div class="row form-group">
+                                        <div class="col-sm-12">
+                                            <label for="select" class=" form-control-label">Select Category</label>
+                                        </div>
+
+                                        <!-- Category -->
+
+                                        <div class="col-sm-12">
+                                            <select name="cat_id" class="form-control" onchange="getsubcategory()" id="cat_id">
+                                                <option>Select Category</option>
+                                                <% for(var sc of cetdata ) {%>
+                                                <option value="<%= sc.id %>"><%= sc.category %></option>
+                                                <% } %>
+                                            </select>
+                                        </div>
+
+                                        <!-- Sub Category -->
+
+                                        <div class="col-sm-12 mt-3">
+                                            <div class="form-group">
+                                                <label>Select Subcategory</label>
+                                                <select name="subcat_id" class="form-control" id="subcat_id" onchange="getExtracategory()">
+                                                        <option>Select Subcategory</option>
+                                                    </select>
+                                            </div>
+                                        </div>
+
+                                        <!-- Extra Category -->
+
+                                        <div class="col-sm-12">
+                                            <div class="form-group" id="Extracat_id">
+                                                <label>Select Extra Category</label>
+                                                <select name="Extracat_id" class="form-control">
+                                                        <option>Select Extra Category</option>
+                                                    </select>
+                                            </div>
+                                        </div>
+
+                                        <!-- Brand -->
+                                        <div id="BrandTypeid">
+                                            <div class="col-sm-12">
+                                                <div class="form-group" id="Brand_id">
+                                                    <label>Select Brand</label>
+                                                    <select name="Brand_id" class="form-control">
+                                                        <option>Select Brand</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <!-- Type -->
+
+                                            <div class="col-sm-12">
+                                                <div class="form-group" id="Type_id">
+                                                    <label>Select Type</label>
+                                                    <select name="Type_id" class="form-control">
+                                                        <option>Select Type</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <!-- text input -->
+                                            <div class="form-group">
+                                                <label>Product Name</label>
+                                                <input type="text" class="form-control" placeholder="Enter Product Name" name="Productname">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label>Select Size</label>
+                                                <select class="select2" name="productsize[]" multiple="multiple" data-placeholder="Select a Size" style="width: 100%;">
+                                                    <option>XXL</option>
+                                                    <option>XL</option>
+                                                    <option>l</option>
+                                                    <option>M</option>
+                                                    <option>S</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label>Select Color</label>
+                                                <select class="select2" name="productcolor[]" multiple="multiple" data-placeholder="Select a Color" style="width: 100%;">
+                                                    <option>Red</option>
+                                                    <option>Green</option>
+                                                    <option>Blue</option>
+                                                    <option>Black</option>
+                                                    <option>Pink</option>
+                                                    <option>Yellow</option>
+                                                    <option>White</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-12">
+                                            <!-- text input -->
+                                            <div class="form-group">
+                                                <label>Product Price</label>
+                                                <input type="number" class="form-control" placeholder="Enter Price" name="Price">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-12">
+                                            <!-- text input -->
+                                            <div class="form-group">
+                                                <label>Product Old Price</label>
+                                                <input type="number" class="form-control" placeholder="Enter Old Price" name="OldPrice">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-12">
+                                            <!-- text input -->
+                                            <div class="form-group">
+                                                <label>Product Discount</label>
+                                                <input type="number" class="form-control" placeholder="Enter Product Discount" name="Discounte">
+                                            </div>
+                                        </div>
+
+                                        <div class="row form-group">
+                                            <div class="col-sm-12">
+                                                <label for="textarea-input" class=" form-control-label">Description</label>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <textarea name="Description" id="textarea-input" rows="1" placeholder="Content..." class="form-control"></textarea>
+                                            </div>
+                                        </div>
+
+                                        <div class="row form-group">
+                                            <div class="col-sm-12">
+                                                <label for="file-input" class=" form-control-label">Image</label>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <input type="file" id="file-input" name="image" class="form-control-file">
+                                            </div>
+                                        </div>
+
+                                        <div class="row form-group">
+                                            <div class="col-sm-12">
+                                                <label for="file-input" class=" form-control-label">Multipal Image</label>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <input type="file" id="file-input" name="multimage" multiple class="form-control-file">
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="card-footer">
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <%- include('../footer') %>

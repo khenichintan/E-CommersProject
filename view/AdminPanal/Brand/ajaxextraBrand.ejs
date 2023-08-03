@@ -1,0 +1,9 @@
+<div class="form-group">
+    <label>Select Extra Category</label>
+    <select name="Extracat_id" class="form-control" id="BYid" onchange="getBrandType()">
+            <option>Select Extra Category</option>
+            <% for(var ev of extradata) {%>
+            <option value="<%= ev.id %>"><%= ev.ExtracatName %></option>
+            <% } %>
+        </select>
+</div>

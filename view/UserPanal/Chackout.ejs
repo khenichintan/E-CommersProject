@@ -1,0 +1,203 @@
+<%- include('User_Header') %>
+    <!-- Page Header Start -->
+    <div class="container-fluid bg-secondary mb-5">
+        <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
+            <h1 class="font-weight-semi-bold text-uppercase mb-3">Chack Out</h1>
+            <div class="d-inline-flex">
+                <p class="m-0"><a href="">Home</a></p>
+                <p class="m-0 px-2">-</p>
+                <p class="m-0">Chack Out</p>
+            </div>
+        </div>
+    </div>
+    <!-- Page Header End -->
+
+    <!-- Checkout Start -->
+    <div class="container-fluid pt-5">
+        <div class="row px-xl-5">
+            <!-- form -->
+            <div class="col-lg-8">
+                <div class="mb-4">
+                    <h4 class="font-weight-semi-bold mb-4">Billing Address</h4>
+                    <form method="post" action="/chackoutrecord">
+                        <div class="row">
+                            <div class="col-md-6 form-group">
+                                <label>First Name</label>
+                                <input class="form-control" name="first_name" type="text" placeholder="John">
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>Last Name</label>
+                                <input class="form-control" name="second_name" type="text" placeholder="Doe">
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>E-mail</label>
+                                <input class="form-control" name="Email" type="text" placeholder="example@email.com">
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>Mobile No</label>
+                                <input class="form-control" name="Mobile_No" type="text" placeholder="+123 456 789">
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>Address Line 1</label>
+                                <input class="form-control" name="Address" type="text" placeholder="123 Street">
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>Pin Code</label>
+                                <input class="form-control" name="Pin" type="text" placeholder="123">
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>City</label>
+                                <input class="form-control" name="City" type="text" placeholder="New York">
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>State</label>
+                                <input class="form-control" name="State" type="text" placeholder="New York">
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>Country</label>
+                                <select class="custom-select" name="Country">
+                                <option selected>United States</option>
+                                <option >India</option>
+                                <option>Afghanistan</option>
+                                <option>Albania</option>
+                                <option>Algeria</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <button type="submit" class="btn  btn-block btn-primary font-weight-bold my-3 py-3">Add
+                                    Address</button>
+
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- bil -->
+            <div class="col-lg-4">
+                <!-- order list -->
+                <div class="card border-secondary mb-5">
+                    <div class="card-header bg-secondary border-0">
+                        <h4 class="font-weight-semi-bold m-0">Order Total</h4>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="font-weight-medium mb-3">Products</h5>
+                        <% var sum=0; var pro_id=[] for (const Pd  of CartData) {%>
+                            <div class="d-flex justify-content-between">
+                                <h5>
+                                    <%= Pd.Product_id.Productname %>
+                                </h5>
+                                <h5>
+                                    <%= Pd.Product_id.Price %>
+                                </h5>
+                            </div>
+                            <% sum+=parseInt(Pd.Product_id.Price*pd.quantity);pro_id.push(pd.Product_id.id) } %>
+
+                                <!-- shipping cost -->
+                                <hr class="mt-0">
+                                <div class="d-flex justify-content-between mb-3 pt-1">
+                                    <h6 class="font-weight-medium">Sub Total</h6>
+                                    <h6 class="font-weight-medium">
+                                        <%= sum %>
+                                    </h6>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <h6 class="font-weight-medium">Shipping Charges</h6>
+                                    <h6 class="font-weight-medium">₹100</h6>
+                                </div>
+                    </div>
+                    <div class="card-footer border-secondary bg-transparent">
+                        <div class="d-flex justify-content-between mt-2">
+                            <h5 class="font-weight-bold">Total</h5>
+                            <h5 class="font-weight-bold">₹
+                                <%= sum+100 %>
+                            </h5>
+                        </div>
+                    </div>
+                </div>
+                <!-- payment method -->
+                <div class="card border-secondary mb-5">
+                    <div class="card-header bg-secondary border-0">
+                        <h4 class="font-weight-semi-bold m-0">Payment</h4>
+                    </div>
+                    <div class="card-footer border-secondary bg-transparent">
+                        <button class="btn btn-lg btn-block btn-primary font-weight-bold my-3 py-3" type="submit" data-bs-toggle="modal" data-bs-target="#payment">Place Order</button>
+                        <form action="/payment" method="post">
+                            <input type="checkbox" value="<%= pro_id %>" checked name="Product_id" hidden>
+                            <input type="hidden" value="<%= sum+100 %>" name="amount">
+                            <div class="modal  fade" id="payment" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-xl modal-dialog-centered  ">
+                                    <div class="modal-content p-3">
+
+                                        <div class="modal-header">
+                                            <h2 class="modal-title fs-5" id="staticBackdropLabel">Payment</h2>
+                                            <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
+                                        </div>
+
+                                        <div class="modal-body">
+                                            <div class=" form-group">
+                                                <label>Card Number</label>
+                                                <input class="form-control" name="card_num" type="tel" placeholder="0000 0000 0000 0000 " id="car_num" onkeyup="num_space()" onkeypress='return event.charCode >= 48 && event.charCode <= 57' maxlength="19" autocomplete="off">
+
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    <div class=" form-group">
+                                                        <label>Expire Date</label>
+
+                                                        <div class="form-control">
+                                                            <input type="number" name="mon" placeholder="MM" id="month" min="1" max="12" maxlength=2 style="border: none; outline: none;" autocomplete="off" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                                            />
+                                                            <input type="year" name="year" placeholder="YY" id="year" maxlength=2 style="border: none;outline: none;" autocomplete="off" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class=" form-group">
+                                                        <label>CVV Code</label>
+                                                        <input class="form-control" name="cvv" type="number" maxlength=3 autocomplete="off" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-primary">Place</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Checkout End -->
+    <%- include('User_Footer') %>
+        <script>
+            //card_space
+            function num_space() {
+                let a = $("#car_num").val();
+                let l = a.length;
+                if (l <= 19 && (l == 4 || l == 9 || l == 14)) {
+                    a += " ";
+                    $("#car_num").val(a)
+                } else if (l > 19) {
+                    let x = a.slice(0, 19);
+                    $("#car_num").val(x)
+                }
+
+            }
+            // address 
+            function add_cl(i) {
+                $('#lab_ad' + i + " div").toggleClass('add_active');
+            }
+            // /address
+
+            let cl = ["btn", "btn-block", "btn-primary", "font-weight-bold", "my-3", "py-3"];
+            document.querySelector("button.stripe-button-el").classList.add(...cl);
+            document.querySelector("button.stripe-button-el span").removeAttribute("style");
+            document.querySelector("button.stripe-button-el span").innerHTML = "Place Order";
+            document.querySelector("button.stripe-button-el").classList.remove("stripe-button-el");
+        </script>

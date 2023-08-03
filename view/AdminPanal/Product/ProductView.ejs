@@ -1,0 +1,150 @@
+<%- include('../header') %>
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Product Tables</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active">Product Tables</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+            <!-- /.container-fluid -->
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Product View</h3>
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body">
+                                <table id="example1" class="table table-bordered table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Category</th>
+                                            <th>Sub Category</th>
+                                            <th>Extra Category</th>
+                                            <th>Brand</th>
+                                            <th>Type</th>
+                                            <th>Product Name</th>
+                                            <th>Product Size</th>
+                                            <th>Product Color</th>
+                                            <th>Price</th>
+                                            <th>Old Price</th>
+                                            <th>Discounte</th>
+                                            <th>Description</th>
+                                            <th>Image</th>
+                                            <th>Multipal Image</th>
+                                            <th>Operation</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% for(var pr of Productdata) {%>
+                                            <tr>
+                                                <input type="hidden" id="ad_id" value="<%= pr.id%>">
+                                                <td>
+                                                    <%= pr.cat_id.category %>
+                                                </td>
+                                                <td>
+                                                    <%= pr.subcat_id.SubcategoryName%>
+                                                </td>
+                                                <td>
+                                                    <%= pr.Extracat_id.ExtracatName %>
+                                                </td>
+                                                <td>
+                                                    <%= pr.Brand_id.Brandname %>
+                                                </td>
+                                                <td>
+                                                    <%= pr.Type_id.Typename %>
+                                                </td>
+                                                <td>
+                                                    <%= pr.Productname %>
+                                                </td>
+                                                <td>
+                                                    <%= pr.productsize %>
+                                                </td>
+                                                <td>
+                                                    <%= pr.productcolor %>
+                                                </td>
+                                                <td>
+                                                    <%= pr.Price %>
+                                                </td>
+                                                <td>
+                                                    <%= pr.OldPrice %>
+                                                </td>
+                                                <td>
+                                                    <%= pr.Discounte %>
+                                                </td>
+                                                <td>
+                                                    <%= pr.Description %>
+                                                </td>
+                                                <td>
+                                                    <%= pr.Description %>
+                                                </td>
+                                                <td><img src="<%= pr.image %>" height="100"></td>
+                                                <td><img src="<%= pr.multimage %>" height="100"></td>
+                                                <td><a href="/Admin/Product/delete/<%= pr.id %>"><i class="fa-solid fa-trash-arrow-up" style="font-size: 25px; padding-right: 20px;"></i></a>
+                                                    <a href="/Admin/Product/update/<%= pr.id %>"><i class="fa-regular fa-pen-to-square" style="font-size: 25px;"></i></a></td>
+
+                                                <td>
+                                                    <% if(pr.isActive) {%>
+                                                        <a onclick="ad()"><i class="fa-regular fa-eye" style="color: #389b31; font-size: 25px;"></i></a>
+                                                        <% } else { %>
+                                                            <a onclick="ad()"><i class=" fa-solid fa-eye " style="color: #d71919; font-size: 25px; "></i></a>
+                                                            <% } %>
+                                                </td>
+
+                                            </tr>
+                                            <% } %>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Category</th>
+                                            <th>Sub Category</th>
+                                            <th>Extra Category</th>
+                                            <th>Brand</th>
+                                            <th>Type</th>
+                                            <th>Product Name</th>
+                                            <th>Product Size</th>
+                                            <th>Product Color</th>
+                                            <th>Price</th>
+                                            <th>Old Price</th>
+                                            <th>Discounte</th>
+                                            <th>Description</th>
+                                            <th>Image</th>
+                                            <th>Multipal Image</th>
+                                            <th>Operation</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.container-fluid -->
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+
+    <%- include('../footer') %>
